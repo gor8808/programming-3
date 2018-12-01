@@ -1,4 +1,4 @@
-//////////   Meteorite    ////////////////////
+//////////   Bomb    ////////////////////
 class Bomb {
     constructor(x, y) {
         this.x = x
