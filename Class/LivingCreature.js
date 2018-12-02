@@ -1,8 +1,11 @@
 class LivingCreature{
-    constructor(x, y) {
+    constructor(x, y, diameter) {
         this.x = x;
         this.y = y;
-        this.multiply = 0;
+        this.diameter = diameter;
+        this.directions = getDirection(this.x, this.y,diameter)
+
+
 
     }
     chooseCell(ch) {
@@ -14,9 +17,13 @@ class LivingCreature{
                 if (matrix[y][x] == ch) {
                     found.push(this.directions[i]);
                 }
+                else if(ch == "all"){
+                    found.push(this.directions[i]);
+                }
             }   
         }
         return found;
     }
+   
 
 }

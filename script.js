@@ -14,27 +14,27 @@ for (var y = 0; y < matrix.length; y++) {
     for (var x = 0; x < matrix[y].length; x++) {
 
         if (matrix[y][x] == 1) {
-            var gress = new Grass(x, y, 1)
+            var gress = new Grass(x, y, 1)//!!
             grassArr.push(gress);
         }
         else if (matrix[y][x] == 2) {
-            var gt = new GrassEater(x, y)
+            var gt = new GrassEater(x, y, 1)//!!
             grassEaterArr.push(gt);
         }
         else if (matrix[y][x] == 3) {
-            var hn = new Hunter(x, y)
+            var hn = new Hunter(x, y, 1)//!!
             hunterArr.push(hn);
         }
         else if (matrix[y][x] == 4) {
-            var ms = new Monster(x, y)
+            var ms = new Monster(x, y, 2)//!!
             monsterArr.push(ms);
         }
         else if (matrix[y][x] == 5) {
-            var bm = new Bomb(x, y)
+            var bm = new Bomb(x, y, 2) //!!
             bombArr.push(bm)
         }
         else if (matrix[y][x] == 6) {
-            var gts = new GrassEaterSpawn(x, y)
+            var gts = new GrassEaterSpawn(x, y, 1)//
             grassEaterSpawnArr.push(gts)
         }
     }
@@ -43,7 +43,7 @@ for (var y = 0; y < matrix.length; y++) {
 
 //setup for j5
 function setup() {
-    frameRate(5);
+    frameRate(15);
     createCanvas(matrix[0].length * side, matrix.length * side);
     background('#acacac');
 }
@@ -86,7 +86,7 @@ function draw() {
 
 
     // calling classes
-    // /*
+    
     for (var i in grassArr) {
         grassArr[i].mult()
     }
@@ -112,7 +112,7 @@ function draw() {
         monsterArr[i].die()
 
     }
-    // */
+
     for (var i in bombArr) {
         bombArr[i].explode()
     }
@@ -124,13 +124,10 @@ function draw() {
     //Checking if grass was won
     if (grassArr.length == n * m && HasNotAlerted) {
         alert("Grass won")
-        HasNotAlerted = false
+        HasNotAlerted = false;
     }
-    else if (grassArr.length == 0 && grassEaterArr.length == 0 && hunterArr.length == 0 && monsterArr == 0 && bombArr == 0 && grassEaterSpawnArr.length == 0 && HasNotAlerted) { 
+    else if (grassArr.length == 0 && grassEaterArr.length == 0 && hunterArr.length == 0 && monsterArr == 0 && bombArr == 0 && grassEaterSpawnArr.length == 0 && HasNotAlerted) {
         alert("its draw")
-        HasNotAlerted = false
+        HasNotAlerted = false;
     }
-
-
-
 }

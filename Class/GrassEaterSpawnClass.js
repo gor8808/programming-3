@@ -1,26 +1,12 @@
 //////////////////// GrassEaterSpawn////////////////
-class GrassEaterSpawn {
-    constructor(x, y) {
-        this.x = x
-        this.y = y
+class GrassEaterSpawn extends LivingCreature {
+    constructor(x, y, diameter) {
+        super(x, y, diameter)
         this.energy = 0
-        this.directions = getDirection(this.x, this.y, 1)
     }
-    chose() {
-        var newDirection = [];
-        //found
-        for (var i in this.directions) {
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                newDirection.push(this.directions[i]);
-
-            }
-        }
-        return newDirection;
-    }
+    
     explode() {
-        this.directions = this.chose()
+        this.directions = this.chooseCell("all")
         for (var i in this.directions) {
             this.energy++
             if (this.energy > 100) {
@@ -69,7 +55,7 @@ class GrassEaterSpawn {
                         }
                     }
                 }
-                
+
                 else if (matrix[y][x] == 5) {
                     for (var i in bombArr) {
                         if (bombArr[i].x == x && bombArr[i].y == y) {
@@ -80,14 +66,14 @@ class GrassEaterSpawn {
                         }
                     }
                 }
-                
+
                 else if (matrix[y][x] == 6) {
                     for (var i in grassEaterSpawnArr) {
                         if (grassEaterSpawnArr[i].x == x && grassEaterSpawnArr[i].y == y) {
                             grassEaterSpawnArr.splice(i, 1)
                             matrix[y][x] = 2
-                             var gt = new GrassEater(x, y)
-                             grassEaterArr.push(gt);
+                            var gt = new GrassEater(x, y)
+                            grassEaterArr.push(gt);
                         }
                     }
                 }
@@ -97,7 +83,7 @@ class GrassEaterSpawn {
 
 
             }
-            
+
         }
 
 

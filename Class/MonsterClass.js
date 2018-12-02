@@ -1,29 +1,15 @@
 ////////////////////////// Monster //////////////////////
-
-class Monster {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
+class Monster extends LivingCreature {
+    constructor(x, y, diameter) {
+        super(x, y, diameter)
         this.energy = 4;
-        this.directions = getDirection(this.x, this.y, 2)
     }
     getNewDirection() {
         this.directions = getDirection(this.x, this.y, 2)
     }
     chooseCell(character) {
         this.getNewDirection()
-        var foundHunter = [];
-        //found
-        for (var i in this.directions) {
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                if (matrix[y][x] == character) {
-                    foundHunter.push(this.directions[i]);
-                }
-            }
-        }
-        return foundHunter;
+        return super.chooseCell(character)
     }
     mult() {
         var empty = random(this.chooseCell(0));

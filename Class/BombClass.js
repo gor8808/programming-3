@@ -1,27 +1,14 @@
 //////////   Bomb    ////////////////////
-class Bomb {
-    constructor(x, y) {
-        this.x = x
-        this.y = y
-        this.energy = 0
-        this.directions = getDirection(this.x, this.y, 2)
+class Bomb extends LivingCreature {
+    constructor(x, y, diameter) {
+        super(x, y)
+        this.directions = getDirection(this.x, this.y, diameter)
+        this.energy = 0;
     }
-    chose() {
-        var newDirection = [];
-        //found
-        for (var i in this.directions) {
-            var x = this.directions[i][0];
-            var y = this.directions[i][1];
-            if (x >= 0 && x < matrix[0].length && y >= 0 && y < matrix.length) {
-                newDirection.push(this.directions[i]);
 
-            }
-        }
-        return newDirection;
-    }
 
     explode() {
-        this.directions = this.chose()
+        this.directions = this.chooseCell("all")
         for (var i in this.directions) {
             this.energy++
             if (this.energy > 200) {
@@ -68,7 +55,7 @@ class Bomb {
                         }
                     }
                 }
-                
+
 
 
 
