@@ -1,11 +1,15 @@
 ////////////////////////    GrassEater   ///////////////////////////////
-class GrassEater extends LivingCreature{
+var LivingCreature = require("./LivingCreature.js") 
+var functions = require("./function.js")
+
+
+module.exports = class GrassEater extends LivingCreature{
     constructor(x, y,diameter) {
         super(x, y, diameter)
         this.energy = 20;
     }
     getNewDirection() {
-        this.directions = getDirection(this.x, this.y, 1)
+        this.directions = functions.getDirection(this.x, this.y, 1)
     }
     chooseCell(character) {
         this.getNewDirection()
@@ -13,7 +17,8 @@ class GrassEater extends LivingCreature{
     }
 
     mult() {
-        var empty = random(this.chooseCell(0));
+        var arr = this.chooseCell(0);
+        var empty = functions.GetRandomValueFromArray(arr);
         if (empty && this.energy > 10) {
             var x = empty[0]
             var y = empty[1]
@@ -24,7 +29,8 @@ class GrassEater extends LivingCreature{
         }
     }
     move() {
-        var empty = random(this.chooseCell(0));
+        var arr = this.chooseCell(0);
+        var empty = functions.GetRandomValueFromArray(arr);
         this.energy--
         if (empty) {
             var x = empty[0]
@@ -38,7 +44,8 @@ class GrassEater extends LivingCreature{
     }
 
     eat() {
-        var food = random(this.chooseCell(1));
+        var arr = this.chooseCell(1);
+        var food = functions.GetRandomValueFromArray(arr);
         if (food) {
             var x = food[0]
             var y = food[1]

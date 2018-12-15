@@ -1,9 +1,10 @@
-class LivingCreature{
+var functions = require("./function.js")
+module.exports = class LivingCreature{
     constructor(x, y, diameter) {
         this.x = x;
         this.y = y;
         this.diameter = diameter;
-        this.directions = getDirection(this.x, this.y,diameter)
+        this.directions = functions.getDirection(this.x, this.y,diameter)
 
 
 

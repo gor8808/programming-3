@@ -1,18 +1,21 @@
 ////////////////////////// Monster //////////////////////
-class Monster extends LivingCreature {
+var LivingCreature = require("./LivingCreature.js") 
+var functions = require("./function.js")
+module.exports = class Monster extends LivingCreature {
     constructor(x, y, diameter) {
         super(x, y, diameter)
         this.energy = 4;
     }
     getNewDirection() {
-        this.directions = getDirection(this.x, this.y, 2)
+        this.directions = functions.getDirection(this.x, this.y, 2)
     }
     chooseCell(character) {
         this.getNewDirection()
         return super.chooseCell(character)
     }
     mult() {
-        var empty = random(this.chooseCell(0));
+        var arr = this.chooseCell(0);
+        var empty = functions.GetRandomValueFromArray(arr);
         if (empty && this.energy > 15) {
             var x = empty[0]
             var y = empty[1]
@@ -23,7 +26,8 @@ class Monster extends LivingCreature {
         }
     }
     move() {
-        var empty = random(this.chooseCell(0));
+        var arr = this.chooseCell(0);
+        var empty = functions.GetRandomValueFromArray(arr);
         this.energy--
         if (empty) {
             var x = empty[0]
@@ -37,8 +41,10 @@ class Monster extends LivingCreature {
     }
 
     eat() {
-        var food = random(this.chooseCell(3));
-        var GressEat = random(this.chooseCell(2))
+        var arrForFood = this.chooseCell(3);
+        var food = functions.GetRandomValueFromArray(arrForFood);
+        var arrForGrassEat = this.chooseCell(2);
+        var GressEat = functions.GetRandomValueFromArray(arrForGrassEat);
         if (food) {
             var x = food[0]
             var y = food[1]

@@ -1,8 +1,11 @@
 //////////   Bomb    ////////////////////
-class Bomb extends LivingCreature {
+var LivingCreature = require("./LivingCreature.js");
+var functions = require("./function.js")
+
+module.exports = class Bomb extends LivingCreature {
     constructor(x, y, diameter) {
         super(x, y)
-        this.directions = getDirection(this.x, this.y, diameter)
+        this.directions = functions.getDirection(this.x, this.y, diameter)
         this.energy = 0;
     }
 

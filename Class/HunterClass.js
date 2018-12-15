@@ -1,18 +1,21 @@
 ///////////////////// HUNTER ///////////////////////////////
-class Hunter extends LivingCreature {
+var functions = require("./function.js")
+var LivingCreature = require("./LivingCreature.js") 
+module.exports = class Hunter extends LivingCreature {
     constructor(x, y, diameter) {
         super(x, y, diameter)
         this.energy = 11;
     }
     getNewDirection() {
-        this.directions = getDirection(this.x, this.y, 1)
+        this.directions = functions.getDirection(this.x, this.y, 1)
     }
     chooseCell(character) {
         this.getNewDirection()
         return super.chooseCell(character)
     }
     mult() {
-        var empty = random(this.chooseCell(0));
+        var arr = this.chooseCell(0);
+        var empty = functions.GetRandomValueFromArray(arr);
         if (empty && this.energy > 10) {
             var x = empty[0]
             var y = empty[1]
@@ -23,7 +26,8 @@ class Hunter extends LivingCreature {
         }
     }
     move() {
-        var empty = random(this.chooseCell(0));
+        var arr = this.chooseCell(0);
+        var empty = functions.GetRandomValueFromArray(arr);
         this.energy--
         if (empty) {
             var x = empty[0]
@@ -36,7 +40,8 @@ class Hunter extends LivingCreature {
         }
     }
     eat() {
-        var food = random(this.chooseCell(2));
+        var arr = this.chooseCell(2);
+        var food = functions.GetRandomValueFromArray(arr);
         if (food) {
             var x = food[0]
             var y = food[1]
