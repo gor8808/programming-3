@@ -5,9 +5,19 @@ module.exports = class Hunter extends LivingCreature {
     constructor(x, y, diameter) {
         super(x, y, diameter)
         this.energy = 11;
+        this.newDiameter = 1;
     }
     getNewDirection() {
-        this.directions = functions.getDirection(this.x, this.y, 1)
+        if(Season == "summer"){
+            this.newDiameter = 2;
+        }
+        else if(Season == "winter"){
+            this.newDiameter = 1;
+        }
+        else if(Season == "spring" || Season == "autumn"){
+            this.newDiameter = 1;
+        }
+        this.directions = functions.getDirection(this.x, this.y, this.newDiameter)
     }
     chooseCell(character) {
         this.getNewDirection()

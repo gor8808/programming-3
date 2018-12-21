@@ -8,7 +8,7 @@ app.get('/', function (req, res) {
     res.redirect('index.html');
 });
 server.listen(3000);
-io.on('connection' , function (socket){
+io.on('connection', function (socket) {
 
 });
 m = 30;
@@ -19,13 +19,14 @@ hunterArr = [];
 monsterArr = [];
 bombArr = [];
 grassEaterSpawnArr = [];
-var Grass           =   require("./Class/GrassClass")
-var GrassEater      =   require("./Class/GrassEaterClass")
-var Hunter          =   require("./Class/HunterClass")
-var Monster         =   require("./Class/MonsterClass")
-var Bomb            =   require("./Class/BombClass")
-var GrassEaterSpawn =   require("./Class/GrassEaterSpawnClass")
-matrix = functions.fillMatrix(m,n);
+Season = "winter";
+var Grass = require("./Class/GrassClass")
+var GrassEater = require("./Class/GrassEaterClass")
+var Hunter = require("./Class/HunterClass")
+var Monster = require("./Class/MonsterClass")
+var Bomb = require("./Class/BombClass")
+var GrassEaterSpawn = require("./Class/GrassEaterSpawnClass")
+matrix = functions.fillMatrix(m, n);
 
 
 
@@ -66,13 +67,33 @@ for (var y = 0; y < matrix.length; y++) {
 
 //setup for j5
 var HasNotAlerted = true;
+setInterval(randomSeason, 3000)
+
+function randomSeason() {
+    if (Season == "winter") {
+        Season = "spring"
+    }
+    else if (Season == "spring") {
+        Season = "summer"
+    }
+    else if (Season == "summer") {
+        Season = "autumn"
+    }
+    else if (Season == "autumn") {
+        Season = "winter"
+    }
+    io.sockets.emit("Season", Season)
+
+}
 
 //j5 function
-var Interval = setInterval(DrawMatrix,1000)
+var Interval = setInterval(DrawMatrix, 1000)
 function DrawMatrix() {
+
+
     //draw matrix
     // calling classes
-    
+
     for (var i in grassArr) {
         grassArr[i].mult()
     }
@@ -111,22 +132,22 @@ function DrawMatrix() {
     if (grassArr.length == n * m && HasNotAlerted) {
         io.sockets.emit("won", true);
         HasNotAlerted = false;
-        clearInterval(Interval)
+        //clearInterval(Interval)
     }
     else if (grassArr.length == 0 && grassEaterArr.length == 0 && hunterArr.length == 0 && monsterArr == 0 && bombArr == 0 && grassEaterSpawnArr.length == 0 && HasNotAlerted) {
-        io.sockets.emit("won", false);  
+        io.sockets.emit("won", false);
         HasNotAlerted = false;
-        clearInterval(Interval)
+        //clearInterval(Interval)
 
 
     }
 
-    
+
 
     io.sockets.emit("matrix", matrix);
 
-    }
+}
 
 
-    
+
 

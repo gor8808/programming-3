@@ -6,13 +6,25 @@ module.exports = class Grass extends LivingCreature {
     constructor(x, y,diameter) {
         super(x, y, diameter)
         this.multiply = 0;
+        this.maxMulCount = 6;
     }
     mult() {
         var arr = this.chooseCell(0);
         var empty = functions.GetRandomValueFromArray(arr);
         
         this.multiply++
-        if (empty && this.multiply > 6) {
+        if(Season == "summer"){
+            this.maxMulCount = 1;
+        }
+        else if(Season == "winter"){
+            this.maxMulCount = 50;
+        }
+        else if(Season == "spring" || Season == "autumn"){
+            this.maxMulCount = 6;
+        }
+
+        
+        if (empty && this.multiply > this.maxMulCount) {
 
             var x = empty[0]
             var y = empty[1]

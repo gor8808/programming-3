@@ -5,18 +5,40 @@ module.exports = class Monster extends LivingCreature {
     constructor(x, y, diameter) {
         super(x, y, diameter)
         this.energy = 4;
+        this.newDiameter = 1;
+        this.maxEnergy = 15;
     }
     getNewDirection() {
-        this.directions = functions.getDirection(this.x, this.y, 2)
+        if(Season == "summer"){
+            this.newDiameter = 1;
+            
+        }
+        else if(Season == "winter"){
+            this.newDiameter = 1;
+        }
+        else if(Season == "spring" || Season == "autumn"){
+            this.newDiameter = 1;
+        }
+        this.directions = functions.getDirection(this.x, this.y, this.newDiameter)
     }
     chooseCell(character) {
         this.getNewDirection()
         return super.chooseCell(character)
     }
     mult() {
+        if(Season == "summer"){
+            this.energy = 2;
+            
+        }
+        else if(Season == "winter"){
+            this.energy = 3;
+        }
+        else if(Season == "spring" || Season == "autumn"){
+            this.energy = 4;
+        }
         var arr = this.chooseCell(0);
         var empty = functions.GetRandomValueFromArray(arr);
-        if (empty && this.energy > 15) {
+        if (empty && this.energy > this.maxEnergy) {
             var x = empty[0]
             var y = empty[1]
             matrix[y][x] = 4;

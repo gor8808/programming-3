@@ -7,14 +7,31 @@ module.exports = class Bomb extends LivingCreature {
         super(x, y)
         this.directions = functions.getDirection(this.x, this.y, diameter)
         this.energy = 0;
+        this.maxEnergy = 200;
     }
 
 
     explode() {
+        if (Season == "winter") {
+            this.maxEnergy = 300;
+
+        }
+        else if (Season == "summer") {
+            this.maxEnergy = 150;
+
+        }
+        else if(Season == "spring"){
+            this.maxEnergy = 200;
+        }
+        else if(Season == "autumn"){
+            this.maxEnergy = 190;
+            
+        }
         this.directions = this.chooseCell("all")
+
         for (var i in this.directions) {
             this.energy++
-            if (this.energy > 200) {
+            if (this.energy > this.maxEnergy) {
                 this.energy--
                 var x = this.directions[i][0]
                 var y = this.directions[i][1]
@@ -74,3 +91,4 @@ module.exports = class Bomb extends LivingCreature {
 
 
 }
+
