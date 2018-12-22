@@ -3,6 +3,7 @@ var app = express();
 var server = require('http').Server(app);
 var io = require('socket.io')(server);
 var functions = require("./Class/function")
+var fs = require('fs');
 app.use(express.static("."));
 app.get('/', function (req, res) {
     res.redirect('index.html');
@@ -20,6 +21,17 @@ monsterArr = [];
 bombArr = [];
 grassEaterSpawnArr = [];
 Season = "winter";
+statisticGrass = []
+statisticGrassEater = []
+statisticBomb = []
+statisticGrassEaterSpawn = []
+statisticHumter = []
+statisticMonster = []
+
+
+
+
+
 var Grass = require("./Class/GrassClass")
 var GrassEater = require("./Class/GrassEaterClass")
 var Hunter = require("./Class/HunterClass")
@@ -38,34 +50,34 @@ for (var y = 0; y < matrix.length; y++) {
     for (var x = 0; x < matrix[y].length; x++) {
 
         if (matrix[y][x] == 1) {
-            var gress = new Grass(x, y, 1)
+            var gress = new Grass(x, y, 1);
             grassArr.push(gress);
         }
         else if (matrix[y][x] == 2) {
-            var gt = new GrassEater(x, y, 1)
+            var gt = new GrassEater(x, y, 1);
             grassEaterArr.push(gt);
         }
         else if (matrix[y][x] == 3) {
-            var hn = new Hunter(x, y, 1)
+            var hn = new Hunter(x, y, 1);
             hunterArr.push(hn);
         }
         else if (matrix[y][x] == 4) {
-            var ms = new Monster(x, y, 2)
+            var ms = new Monster(x, y, 2);
             monsterArr.push(ms);
         }
         else if (matrix[y][x] == 5) {
-            var bm = new Bomb(x, y, 2) //!!
+            var bm = new Bomb(x, y, 2); //!!
             bombArr.push(bm)
         }
         else if (matrix[y][x] == 6) {
-            var gts = new GrassEaterSpawn(x, y, 1)//
+            var gts = new GrassEaterSpawn(x, y, 1);//
             grassEaterSpawnArr.push(gts)
         }
     }
 }
 
 
-//setup for j5
+
 var HasNotAlerted = true;
 setInterval(randomSeason, 3000)
 
@@ -86,12 +98,9 @@ function randomSeason() {
 
 }
 
-//j5 function
+
 var Interval = setInterval(DrawMatrix, 1000)
 function DrawMatrix() {
-
-
-    //draw matrix
     // calling classes
 
     for (var i in grassArr) {
@@ -147,6 +156,50 @@ function DrawMatrix() {
     io.sockets.emit("matrix", matrix);
 
 }
+function writingStatitistic(){
+    var grassLengthNow = grassArr.length;
+    var grassEaterLengthNow = grassEaterArr.length;
+    var bombLengthNow = bombArr.length;
+    var GrassEaterSpawnLengthNow = grassEaterSpawnArr.length;
+    var HunterLengthNow = hunterArr.length;
+    var MonsterLengthNow = monsterArr.length;
+
+
+
+    if(grassLengthNow >= grassArr.length){
+        statisticGrass.push(grassLengthNow)
+    }
+    if(grassEaterLengthNow >= grassEaterArr.length){
+        statisticGrassEater.push(grassEaterLengthNow)
+    }
+    if(bombLengthNow >= bombArr.length){
+        statisticBomb.push(bombLengthNow)
+    }
+    if( GrassEaterSpawnLengthNow>= grassEaterSpawnArr.length){
+        statisticGrassEaterSpawn.push(GrassEaterSpawnLengthNow)
+    }
+    if(HunterLengthNow >= hunterArr.length){
+        statisticHumter.push(HunterLengthNow)
+    }
+    if(MonsterLengthNow >= monsterArr.length){
+        statisticMonster.push(MonsterLengthNow)
+    }
+   
+    var GrassJSON = JSON.stringify(statisticGrass);
+    var GrassEaterJSON = JSON.stringify(statisticGrassEater);
+    var BombJSON = JSON.stringify(statisticBomb);
+    var GrassEaterSpawnJSON = JSON.stringify(statisticGrassEaterSpawn);
+    var HunterJSON = JSON.stringify(statisticHumter);
+    var MonsterJSON = JSON.stringify(statisticMonster);
+
+
+
+
+
+    fs.writeFileSync('statistic.json','{\n\n' +'"Grass":'+GrassJSON + ",\n"+'"GrassEater":'+GrassEaterJSON+",\n"+'"Bomb":'+BombJSON+",\n"+'"GrassEaterSpawn":'+GrassEaterSpawnJSON+",\n"+'"Hunter":'+HunterJSON+",\n"+'"Monster":'+MonsterJSON+"\n\n }",function(err){console.log(err)});
+        
+}
+setInterval(writingStatitistic,5000); 
 
 
 

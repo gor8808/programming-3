@@ -6,6 +6,7 @@ Season = ""
 //setup for j5
 function setup() {
     frameRate(30);
+    noStroke()
     createCanvas(m * side, n * side);
     background('#acacac');    
 }
