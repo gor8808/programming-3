@@ -1,5 +1,5 @@
 ////////////////////////// Monster //////////////////////
-var LivingCreature = require("./LivingCreature.js") 
+var LivingCreature = require("./LivingCreature.js")
 var functions = require("./function.js")
 module.exports = class Monster extends LivingCreature {
     constructor(x, y, diameter) {
@@ -9,14 +9,14 @@ module.exports = class Monster extends LivingCreature {
         this.maxEnergy = 15;
     }
     getNewDirection() {
-        if(Season == "summer"){
+        if (Season == "summer") {
             this.newDiameter = 1;
-            
+
         }
-        else if(Season == "winter"){
+        else if (Season == "winter") {
             this.newDiameter = 1;
         }
-        else if(Season == "spring" || Season == "autumn"){
+        else if (Season == "spring" || Season == "autumn") {
             this.newDiameter = 1;
         }
         this.directions = functions.getDirection(this.x, this.y, this.newDiameter)
@@ -26,14 +26,14 @@ module.exports = class Monster extends LivingCreature {
         return super.chooseCell(character)
     }
     mult() {
-        if(Season == "summer"){
+        if (Season == "summer") {
             this.energy = 2;
-            
+
         }
-        else if(Season == "winter"){
+        else if (Season == "winter") {
             this.energy = 3;
         }
-        else if(Season == "spring" || Season == "autumn"){
+        else if (Season == "spring" || Season == "autumn") {
             this.energy = 4;
         }
         var arr = this.chooseCell(0);

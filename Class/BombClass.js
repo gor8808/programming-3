@@ -20,12 +20,12 @@ module.exports = class Bomb extends LivingCreature {
             this.maxEnergy = 150;
 
         }
-        else if(Season == "spring"){
+        else if (Season == "spring") {
             this.maxEnergy = 200;
         }
-        else if(Season == "autumn"){
+        else if (Season == "autumn") {
             this.maxEnergy = 190;
-            
+
         }
         this.directions = this.chooseCell("all")
 

@@ -66,11 +66,11 @@ for (var y = 0; y < matrix.length; y++) {
             monsterArr.push(ms);
         }
         else if (matrix[y][x] == 5) {
-            var bm = new Bomb(x, y, 2); //!!
+            var bm = new Bomb(x, y, 2);
             bombArr.push(bm)
         }
         else if (matrix[y][x] == 6) {
-            var gts = new GrassEaterSpawn(x, y, 1);//
+            var gts = new GrassEaterSpawn(x, y, 1);
             grassEaterSpawnArr.push(gts)
         }
     }
@@ -141,12 +141,12 @@ function DrawMatrix() {
     if (grassArr.length == n * m && HasNotAlerted) {
         io.sockets.emit("won", true);
         HasNotAlerted = false;
-        //clearInterval(Interval)
+        clearInterval(Interval)
     }
     else if (grassArr.length == 0 && grassEaterArr.length == 0 && hunterArr.length == 0 && monsterArr == 0 && bombArr == 0 && grassEaterSpawnArr.length == 0 && HasNotAlerted) {
         io.sockets.emit("won", false);
         HasNotAlerted = false;
-        //clearInterval(Interval)
+        clearInterval(Interval)
 
 
     }
@@ -156,7 +156,8 @@ function DrawMatrix() {
     io.sockets.emit("matrix", matrix);
 
 }
-function writingStatitistic(){
+//statistic of hummans
+function writingStatitistic() {
     var grassLengthNow = grassArr.length;
     var grassEaterLengthNow = grassEaterArr.length;
     var bombLengthNow = bombArr.length;
@@ -166,25 +167,25 @@ function writingStatitistic(){
 
 
 
-    if(grassLengthNow >= grassArr.length){
+    if (grassLengthNow >= grassArr.length) {
         statisticGrass.push(grassLengthNow)
     }
-    if(grassEaterLengthNow >= grassEaterArr.length){
+    if (grassEaterLengthNow >= grassEaterArr.length) {
         statisticGrassEater.push(grassEaterLengthNow)
     }
-    if(bombLengthNow >= bombArr.length){
+    if (bombLengthNow >= bombArr.length) {
         statisticBomb.push(bombLengthNow)
     }
-    if( GrassEaterSpawnLengthNow>= grassEaterSpawnArr.length){
+    if (GrassEaterSpawnLengthNow >= grassEaterSpawnArr.length) {
         statisticGrassEaterSpawn.push(GrassEaterSpawnLengthNow)
     }
-    if(HunterLengthNow >= hunterArr.length){
+    if (HunterLengthNow >= hunterArr.length) {
         statisticHumter.push(HunterLengthNow)
     }
-    if(MonsterLengthNow >= monsterArr.length){
+    if (MonsterLengthNow >= monsterArr.length) {
         statisticMonster.push(MonsterLengthNow)
     }
-   
+
     var GrassJSON = JSON.stringify(statisticGrass);
     var GrassEaterJSON = JSON.stringify(statisticGrassEater);
     var BombJSON = JSON.stringify(statisticBomb);
@@ -196,10 +197,10 @@ function writingStatitistic(){
 
 
 
-    fs.writeFileSync('statistic.json','{\n\n' +'"Grass":'+GrassJSON + ",\n"+'"GrassEater":'+GrassEaterJSON+",\n"+'"Bomb":'+BombJSON+",\n"+'"GrassEaterSpawn":'+GrassEaterSpawnJSON+",\n"+'"Hunter":'+HunterJSON+",\n"+'"Monster":'+MonsterJSON+"\n\n }",function(err){console.log(err)});
-        
+    fs.writeFileSync('statistic.json', '{\n\n' + '"Grass":' + GrassJSON + ",\n" + '"GrassEater":' + GrassEaterJSON + ",\n" + '"Bomb":' + BombJSON + ",\n" + '"GrassEaterSpawn":' + GrassEaterSpawnJSON + ",\n" + '"Hunter":' + HunterJSON + ",\n" + '"Monster":' + MonsterJSON + "\n\n }", function (err) { console.log(err) });
+
 }
-setInterval(writingStatitistic,5000); 
+setInterval(writingStatitistic, 5000);
 
 
 

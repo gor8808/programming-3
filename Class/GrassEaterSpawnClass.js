@@ -1,6 +1,6 @@
 //////////////////// GrassEaterSpawn////////////////
 var functions = require("./function.js")
-var LivingCreature = require("./LivingCreature.js") 
+var LivingCreature = require("./LivingCreature.js")
 var GrassEater = require("./GrassEaterClass")
 
 
@@ -11,7 +11,7 @@ module.exports = class GrassEaterSpawn extends LivingCreature {
         this.energy = 0
         this.maxEnergy = 100
     }
-    
+
     explode() {
         if (Season == "winter") {
             this.maxEnergy = 200;
@@ -21,12 +21,12 @@ module.exports = class GrassEaterSpawn extends LivingCreature {
             this.maxEnergy = 50;
 
         }
-        else if(Season == "spring"){
+        else if (Season == "spring") {
             this.maxEnergy = 100;
         }
-        else if(Season == "autumn"){
+        else if (Season == "autumn") {
             this.maxEnergy = 90;
-            
+
         }
         this.directions = this.chooseCell("all")
         for (var i in this.directions) {

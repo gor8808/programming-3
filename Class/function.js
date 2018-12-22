@@ -69,7 +69,7 @@ module.exports =
             for (var i = 0; i < b; i++) {
                 matrix[Math.round(this.getRandomArbitrary(0, m - 1))][Math.round(this.getRandomArbitrary(0, n - 1))] = a
             }
-        }  
+        }
 
     }
 

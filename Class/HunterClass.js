@@ -1,6 +1,6 @@
 ///////////////////// HUNTER ///////////////////////////////
 var functions = require("./function.js")
-var LivingCreature = require("./LivingCreature.js") 
+var LivingCreature = require("./LivingCreature.js")
 module.exports = class Hunter extends LivingCreature {
     constructor(x, y, diameter) {
         super(x, y, diameter)
@@ -8,13 +8,13 @@ module.exports = class Hunter extends LivingCreature {
         this.newDiameter = 1;
     }
     getNewDirection() {
-        if(Season == "summer"){
+        if (Season == "summer") {
             this.newDiameter = 2;
         }
-        else if(Season == "winter"){
+        else if (Season == "winter") {
             this.newDiameter = 1;
         }
-        else if(Season == "spring" || Season == "autumn"){
+        else if (Season == "spring" || Season == "autumn") {
             this.newDiameter = 1;
         }
         this.directions = functions.getDirection(this.x, this.y, this.newDiameter)

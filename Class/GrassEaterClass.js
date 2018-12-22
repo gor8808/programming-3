@@ -1,10 +1,10 @@
 ////////////////////////    GrassEater   ///////////////////////////////
-var LivingCreature = require("./LivingCreature.js") 
+var LivingCreature = require("./LivingCreature.js")
 var functions = require("./function.js")
 
 
-module.exports = class GrassEater extends LivingCreature{
-    constructor(x, y,diameter) {
+module.exports = class GrassEater extends LivingCreature {
+    constructor(x, y, diameter) {
         super(x, y, diameter)
         this.energy = 20;
     }
